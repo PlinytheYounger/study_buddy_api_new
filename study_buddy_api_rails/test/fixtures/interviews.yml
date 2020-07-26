@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  interview_type: MyString
+  company_name: MyString
+  interview_date: 2020-07-26
+
+two:
+  interview_type: MyString
+  company_name: MyString
+  interview_date: 2020-07-26
