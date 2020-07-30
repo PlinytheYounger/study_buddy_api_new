@@ -74,3 +74,319 @@ Migrating to AddForeignKeyToRelationship (20200726231902)
   [1m[36mActiveRecord::InternalMetadata Load (0.4ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
   [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_advisory_unlock(625917114547460610)[0m
   [1m[35m (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (4.8ms)[0m  [1m[32mINSERT INTO "users" ("username", "name", "email", "password", "study_availability", "isLoggedIn", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["username", "love2code"], ["name", "Whitney"], ["email", "whitney@mail.com"], ["password", "love2code"], ["study_availability", 10], ["isLoggedIn", false], ["created_at", "2020-07-26 23:27:38.859741"], ["updated_at", "2020-07-26 23:27:38.859741"]]
+  [1m[35m (16.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mInterview Create (4.1ms)[0m  [1m[32mINSERT INTO "interviews" ("company_name", "created_at", "updated_at", "user_id") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["company_name", "Google"], ["created_at", "2020-07-26 23:28:53.845249"], ["updated_at", "2020-07-26 23:28:53.845249"], ["user_id", 1]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mInterview Exists? (1.7ms)[0m  [1m[34mSELECT 1 AS one FROM "interviews" WHERE "interviews"."user_id" = $1 LIMIT $2[0m  [["user_id", 1], ["LIMIT", 1]]
+  [1m[36mInterview Load (0.5ms)[0m  [1m[34mSELECT "interviews".* FROM "interviews" WHERE "interviews"."user_id" = $1[0m  [["user_id", 1]]
+Started GET "/users/1" for ::1 at 2020-07-26 16:29:14 -0700
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:44:in `set_user'
+  [1m[36mConcept Load (30.9ms)[0m  [1m[34mSELECT "concepts".* FROM "concepts" INNER JOIN "comprehensions" ON "concepts"."id" = "comprehensions"."concept_id" WHERE "comprehensions"."user_id" = $1[0m  [["user_id", 1]]
+  ↳ app/controllers/users_controller.rb:13:in `show'
+  [1m[36mInterview Load (0.5ms)[0m  [1m[34mSELECT "interviews".* FROM "interviews" WHERE "interviews"."user_id" = $1[0m  [["user_id", 1]]
+  ↳ app/controllers/users_controller.rb:13:in `show'
+Completed 200 OK in 106ms (Views: 0.1ms | ActiveRecord: 40.6ms | Allocations: 25453)
+
+
+Started GET "/users/1" for ::1 at 2020-07-29 17:40:12 -0700
+  [1m[35m (23.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by UsersController#show as */*
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (13.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:44:in `set_user'
+  [1m[36mConcept Load (10.3ms)[0m  [1m[34mSELECT "concepts".* FROM "concepts" INNER JOIN "comprehensions" ON "concepts"."id" = "comprehensions"."concept_id" WHERE "comprehensions"."user_id" = $1[0m  [["user_id", 1]]
+  ↳ app/controllers/users_controller.rb:13:in `show'
+  [1m[36mInterview Load (6.6ms)[0m  [1m[34mSELECT "interviews".* FROM "interviews" WHERE "interviews"."user_id" = $1[0m  [["user_id", 1]]
+  ↳ app/controllers/users_controller.rb:13:in `show'
+Completed 200 OK in 299ms (Views: 0.1ms | ActiveRecord: 228.0ms | Allocations: 23874)
+
+
+Started GET "/users/1" for ::1 at 2020-07-29 17:41:05 -0700
+Processing by UsersController#show as */*
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:44:in `set_user'
+  [1m[36mConcept Load (7.6ms)[0m  [1m[34mSELECT "concepts".* FROM "concepts" INNER JOIN "comprehensions" ON "concepts"."id" = "comprehensions"."concept_id" WHERE "comprehensions"."user_id" = $1[0m  [["user_id", 1]]
+  ↳ app/controllers/users_controller.rb:13:in `show'
+  [1m[36mInterview Load (9.0ms)[0m  [1m[34mSELECT "interviews".* FROM "interviews" WHERE "interviews"."user_id" = $1[0m  [["user_id", 1]]
+  ↳ app/controllers/users_controller.rb:13:in `show'
+Completed 200 OK in 27ms (Views: 0.1ms | ActiveRecord: 16.9ms | Allocations: 2815)
+
+
+Started GET "/users/1" for ::1 at 2020-07-29 17:41:08 -0700
+Processing by UsersController#show as */*
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (5.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:44:in `set_user'
+  [1m[36mConcept Load (0.9ms)[0m  [1m[34mSELECT "concepts".* FROM "concepts" INNER JOIN "comprehensions" ON "concepts"."id" = "comprehensions"."concept_id" WHERE "comprehensions"."user_id" = $1[0m  [["user_id", 1]]
+  ↳ app/controllers/users_controller.rb:13:in `show'
+  [1m[36mInterview Load (1.1ms)[0m  [1m[34mSELECT "interviews".* FROM "interviews" WHERE "interviews"."user_id" = $1[0m  [["user_id", 1]]
+  ↳ app/controllers/users_controller.rb:13:in `show'
+Completed 200 OK in 13ms (Views: 0.1ms | ActiveRecord: 7.9ms | Allocations: 2818)
+
+
+Started GET "/users/1" for ::1 at 2020-07-29 17:41:14 -0700
+Processing by UsersController#show as */*
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (47.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:44:in `set_user'
+  [1m[36mConcept Load (4.0ms)[0m  [1m[34mSELECT "concepts".* FROM "concepts" INNER JOIN "comprehensions" ON "concepts"."id" = "comprehensions"."concept_id" WHERE "comprehensions"."user_id" = $1[0m  [["user_id", 1]]
+  ↳ app/controllers/users_controller.rb:13:in `show'
+  [1m[36mInterview Load (0.3ms)[0m  [1m[34mSELECT "interviews".* FROM "interviews" WHERE "interviews"."user_id" = $1[0m  [["user_id", 1]]
+  ↳ app/controllers/users_controller.rb:13:in `show'
+Completed 200 OK in 57ms (Views: 0.1ms | ActiveRecord: 51.7ms | Allocations: 2815)
+
+
+Started GET "/users/1" for ::1 at 2020-07-29 17:41:31 -0700
+Processing by UsersController#show as */*
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (2.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:44:in `set_user'
+  [1m[36mConcept Load (0.4ms)[0m  [1m[34mSELECT "concepts".* FROM "concepts" INNER JOIN "comprehensions" ON "concepts"."id" = "comprehensions"."concept_id" WHERE "comprehensions"."user_id" = $1[0m  [["user_id", 1]]
+  ↳ app/controllers/users_controller.rb:13:in `show'
+  [1m[36mInterview Load (8.8ms)[0m  [1m[34mSELECT "interviews".* FROM "interviews" WHERE "interviews"."user_id" = $1[0m  [["user_id", 1]]
+  ↳ app/controllers/users_controller.rb:13:in `show'
+Completed 200 OK in 17ms (Views: 0.1ms | ActiveRecord: 11.6ms | Allocations: 2815)
+
+
+Started GET "/users/1" for ::1 at 2020-07-29 17:41:35 -0700
+Processing by UsersController#show as */*
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (2.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:44:in `set_user'
+  [1m[36mConcept Load (0.8ms)[0m  [1m[34mSELECT "concepts".* FROM "concepts" INNER JOIN "comprehensions" ON "concepts"."id" = "comprehensions"."concept_id" WHERE "comprehensions"."user_id" = $1[0m  [["user_id", 1]]
+  ↳ app/controllers/users_controller.rb:13:in `show'
+  [1m[36mInterview Load (0.9ms)[0m  [1m[34mSELECT "interviews".* FROM "interviews" WHERE "interviews"."user_id" = $1[0m  [["user_id", 1]]
+  ↳ app/controllers/users_controller.rb:13:in `show'
+Completed 200 OK in 10ms (Views: 0.1ms | ActiveRecord: 4.5ms | Allocations: 2798)
+
+
+Started GET "/users/1" for ::1 at 2020-07-29 17:41:47 -0700
+Processing by UsersController#show as */*
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:44:in `set_user'
+  [1m[36mConcept Load (1.1ms)[0m  [1m[34mSELECT "concepts".* FROM "concepts" INNER JOIN "comprehensions" ON "concepts"."id" = "comprehensions"."concept_id" WHERE "comprehensions"."user_id" = $1[0m  [["user_id", 1]]
+  ↳ app/controllers/users_controller.rb:13:in `show'
+  [1m[36mInterview Load (0.2ms)[0m  [1m[34mSELECT "interviews".* FROM "interviews" WHERE "interviews"."user_id" = $1[0m  [["user_id", 1]]
+  ↳ app/controllers/users_controller.rb:13:in `show'
+Completed 200 OK in 7ms (Views: 0.1ms | ActiveRecord: 1.5ms | Allocations: 2798)
+
+
+Started GET "/users/1" for ::1 at 2020-07-29 17:42:48 -0700
+Processing by UsersController#show as */*
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:44:in `set_user'
+  [1m[36mConcept Load (36.0ms)[0m  [1m[34mSELECT "concepts".* FROM "concepts" INNER JOIN "comprehensions" ON "concepts"."id" = "comprehensions"."concept_id" WHERE "comprehensions"."user_id" = $1[0m  [["user_id", 1]]
+  ↳ app/controllers/users_controller.rb:13:in `show'
+  [1m[36mInterview Load (0.9ms)[0m  [1m[34mSELECT "interviews".* FROM "interviews" WHERE "interviews"."user_id" = $1[0m  [["user_id", 1]]
+  ↳ app/controllers/users_controller.rb:13:in `show'
+Completed 200 OK in 45ms (Views: 0.5ms | ActiveRecord: 37.9ms | Allocations: 2798)
+
+
+Started GET "/users/undefined" for ::1 at 2020-07-29 17:43:18 -0700
+Processing by UsersController#show as */*
+  Parameters: {"id"=>"undefined"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", nil], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:44:in `set_user'
+Completed 404 Not Found in 1ms (ActiveRecord: 0.2ms | Allocations: 654)
+
+
+  
+ActiveRecord::RecordNotFound (Couldn't find User with 'id'=undefined):
+  
+app/controllers/users_controller.rb:44:in `set_user'
+Started GET "/users/1" for ::1 at 2020-07-29 17:43:25 -0700
+Processing by UsersController#show as */*
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (7.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:44:in `set_user'
+  [1m[36mConcept Load (0.3ms)[0m  [1m[34mSELECT "concepts".* FROM "concepts" INNER JOIN "comprehensions" ON "concepts"."id" = "comprehensions"."concept_id" WHERE "comprehensions"."user_id" = $1[0m  [["user_id", 1]]
+  ↳ app/controllers/users_controller.rb:13:in `show'
+  [1m[36mInterview Load (0.2ms)[0m  [1m[34mSELECT "interviews".* FROM "interviews" WHERE "interviews"."user_id" = $1[0m  [["user_id", 1]]
+  ↳ app/controllers/users_controller.rb:13:in `show'
+Completed 200 OK in 45ms (Views: 0.1ms | ActiveRecord: 7.9ms | Allocations: 2802)
+
+
+  [1m[35m (1.6ms)[0m  [1m[34mSELECT pg_try_advisory_lock(625917114547460610)[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to DeleteColumInUser (20200730004550)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (28.6ms)[0m  [1m[35mALTER TABLE "users" DROP COLUMN "password"[0m
+  [1m[36mprimary::SchemaMigration Create (3.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20200730004550"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (6.2ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(625917114547460610)[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_try_advisory_lock(625917114547460610)[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to AddNewColumnToUser (20200730004644)
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(625917114547460610)[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_try_advisory_lock(625917114547460610)[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to AddNewColumnToUser (20200730004644)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (7.1ms)[0m  [1m[35mALTER TABLE "users" ADD "password_digest" character varying[0m
+  [1m[36mprimary::SchemaMigration Create (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20200730004644"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(625917114547460610)[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(625917114547460610)[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to AddColumnToUser (20200730004921)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.6ms)[0m  [1m[35mALTER TABLE "users" ADD "password" character varying[0m
+  [1m[36mprimary::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20200730004921"]]
+  [1m[35m (5.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.4ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT pg_advisory_unlock(625917114547460610)[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Create (2.9ms)[0m  [1m[32mINSERT INTO "users" ("username", "name", "email", "created_at", "updated_at", "password_digest") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["username", "Betty"], ["name", "Betty"], ["email", "betty@mail.com"], ["created_at", "2020-07-30 00:51:58.309151"], ["updated_at", "2020-07-30 00:51:58.309151"], ["password_digest", "$2a$12$TwbXy1Sby.qEoojqkfEsz.F/tQ2MfDwOO1vCK.l0lIOOu1zu4vLES"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+Started POST "/users/login?user[username]=Betty&user[password]=[FILTERED]" for ::1 at 2020-07-29 17:57:27 -0700
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by UsersController#login as */*
+  Parameters: {"review"=>{"title"=>"Hey! Say! JUMP", "content"=>"Hey Say! BEST", "author"=>"Samuel"}, "user"=>{"username"=>"Betty", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "Betty"], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:18:in `login'
+Completed 200 OK in 270ms (Views: 1.2ms | ActiveRecord: 5.3ms | Allocations: 11477)
+
+
+Started POST "/users/login?user[username]=Betty&user[password]=[FILTERED]" for ::1 at 2020-07-29 17:57:41 -0700
+Processing by UsersController#login as */*
+  Parameters: {"review"=>{"title"=>"Hey! Say! JUMP", "content"=>"Hey Say! BEST", "author"=>"Samuel"}, "user"=>{"username"=>"Betty", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "Betty"], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:18:in `login'
+Completed 200 OK in 209ms (Views: 0.1ms | ActiveRecord: 0.4ms | Allocations: 762)
+
+
+Started POST "/users/login?user[username]=Betty&user[password]=[FILTERED]" for ::1 at 2020-07-29 18:10:11 -0700
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by UsersController#login as */*
+  Parameters: {"review"=>{"title"=>"Hey! Say! JUMP", "content"=>"Hey Say! BEST", "author"=>"Samuel"}, "user"=>{"username"=>"Betty", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (1.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "Betty"], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:18:in `login'
+Completed 200 OK in 261ms (Views: 0.2ms | ActiveRecord: 11.5ms | Allocations: 11306)
+
+
+Started POST "/users/login?user[username]=Betty&user[password]=[FILTERED]" for ::1 at 2020-07-29 18:10:14 -0700
+Processing by UsersController#login as */*
+  Parameters: {"review"=>{"title"=>"Hey! Say! JUMP", "content"=>"Hey Say! BEST", "author"=>"Samuel"}, "user"=>{"username"=>"Betty", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "Betty"], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:18:in `login'
+Completed 200 OK in 209ms (Views: 0.6ms | ActiveRecord: 0.3ms | Allocations: 1052)
+
+
+Started GET "/users/1" for ::1 at 2020-07-29 18:35:25 -0700
+Processing by UsersController#show as */*
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (1.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:55:in `set_user'
+  [1m[36mConcept Load (24.5ms)[0m  [1m[34mSELECT "concepts".* FROM "concepts" INNER JOIN "comprehensions" ON "concepts"."id" = "comprehensions"."concept_id" WHERE "comprehensions"."user_id" = $1[0m  [["user_id", 1]]
+  ↳ app/controllers/users_controller.rb:13:in `show'
+  [1m[36mInterview Load (0.3ms)[0m  [1m[34mSELECT "interviews".* FROM "interviews" WHERE "interviews"."user_id" = $1[0m  [["user_id", 1]]
+  ↳ app/controllers/users_controller.rb:13:in `show'
+Completed 200 OK in 129ms (Views: 0.3ms | ActiveRecord: 39.8ms | Allocations: 15643)
+
+
+Started GET "/users/1" for ::1 at 2020-07-29 18:35:28 -0700
+Processing by UsersController#show as */*
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (4.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:55:in `set_user'
+  [1m[36mConcept Load (0.3ms)[0m  [1m[34mSELECT "concepts".* FROM "concepts" INNER JOIN "comprehensions" ON "concepts"."id" = "comprehensions"."concept_id" WHERE "comprehensions"."user_id" = $1[0m  [["user_id", 1]]
+  ↳ app/controllers/users_controller.rb:13:in `show'
+  [1m[36mInterview Load (0.3ms)[0m  [1m[34mSELECT "interviews".* FROM "interviews" WHERE "interviews"."user_id" = $1[0m  [["user_id", 1]]
+  ↳ app/controllers/users_controller.rb:13:in `show'
+Completed 200 OK in 10ms (Views: 0.1ms | ActiveRecord: 5.0ms | Allocations: 2818)
+
+
+Started GET "/users/1" for ::1 at 2020-07-29 18:36:40 -0700
+Processing by UsersController#show as */*
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (41.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:55:in `set_user'
+  [1m[36mConcept Load (1.6ms)[0m  [1m[34mSELECT "concepts".* FROM "concepts" INNER JOIN "comprehensions" ON "concepts"."id" = "comprehensions"."concept_id" WHERE "comprehensions"."user_id" = $1[0m  [["user_id", 1]]
+  ↳ app/controllers/users_controller.rb:13:in `show'
+  [1m[36mInterview Load (7.9ms)[0m  [1m[34mSELECT "interviews".* FROM "interviews" WHERE "interviews"."user_id" = $1[0m  [["user_id", 1]]
+  ↳ app/controllers/users_controller.rb:13:in `show'
+Completed 200 OK in 58ms (Views: 0.1ms | ActiveRecord: 51.1ms | Allocations: 2818)
+
+
+Started GET "/users/1" for ::1 at 2020-07-29 18:37:14 -0700
+Processing by UsersController#show as */*
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (48.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:55:in `set_user'
+  [1m[36mConcept Load (2.3ms)[0m  [1m[34mSELECT "concepts".* FROM "concepts" INNER JOIN "comprehensions" ON "concepts"."id" = "comprehensions"."concept_id" WHERE "comprehensions"."user_id" = $1[0m  [["user_id", 1]]
+  ↳ app/controllers/users_controller.rb:13:in `show'
+  [1m[36mInterview Load (0.8ms)[0m  [1m[34mSELECT "interviews".* FROM "interviews" WHERE "interviews"."user_id" = $1[0m  [["user_id", 1]]
+  ↳ app/controllers/users_controller.rb:13:in `show'
+Completed 200 OK in 59ms (Views: 0.1ms | ActiveRecord: 51.9ms | Allocations: 2801)
+
+
+Started GET "/users/1" for ::1 at 2020-07-29 18:37:58 -0700
+Processing by UsersController#show as */*
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:55:in `set_user'
+  [1m[36mConcept Load (2.3ms)[0m  [1m[34mSELECT "concepts".* FROM "concepts" INNER JOIN "comprehensions" ON "concepts"."id" = "comprehensions"."concept_id" WHERE "comprehensions"."user_id" = $1[0m  [["user_id", 1]]
+  ↳ app/controllers/users_controller.rb:13:in `show'
+  [1m[36mInterview Load (0.3ms)[0m  [1m[34mSELECT "interviews".* FROM "interviews" WHERE "interviews"."user_id" = $1[0m  [["user_id", 1]]
+  ↳ app/controllers/users_controller.rb:13:in `show'
+Completed 200 OK in 8ms (Views: 0.1ms | ActiveRecord: 3.1ms | Allocations: 2802)
+
+
+Started GET "/users/1" for ::1 at 2020-07-29 18:38:11 -0700
+Processing by UsersController#show as */*
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (5.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:55:in `set_user'
+  [1m[36mConcept Load (1.5ms)[0m  [1m[34mSELECT "concepts".* FROM "concepts" INNER JOIN "comprehensions" ON "concepts"."id" = "comprehensions"."concept_id" WHERE "comprehensions"."user_id" = $1[0m  [["user_id", 1]]
+  ↳ app/controllers/users_controller.rb:13:in `show'
+  [1m[36mInterview Load (0.7ms)[0m  [1m[34mSELECT "interviews".* FROM "interviews" WHERE "interviews"."user_id" = $1[0m  [["user_id", 1]]
+  ↳ app/controllers/users_controller.rb:13:in `show'
+Completed 200 OK in 13ms (Views: 0.2ms | ActiveRecord: 7.9ms | Allocations: 2801)
+
+
+Started GET "/users/1" for ::1 at 2020-07-29 18:38:49 -0700
+Processing by UsersController#show as */*
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (1.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:55:in `set_user'
+  [1m[36mConcept Load (3.5ms)[0m  [1m[34mSELECT "concepts".* FROM "concepts" INNER JOIN "comprehensions" ON "concepts"."id" = "comprehensions"."concept_id" WHERE "comprehensions"."user_id" = $1[0m  [["user_id", 1]]
+  ↳ app/controllers/users_controller.rb:13:in `show'
+  [1m[36mInterview Load (5.5ms)[0m  [1m[34mSELECT "interviews".* FROM "interviews" WHERE "interviews"."user_id" = $1[0m  [["user_id", 1]]
+  ↳ app/controllers/users_controller.rb:13:in `show'
+Completed 200 OK in 16ms (Views: 0.2ms | ActiveRecord: 10.9ms | Allocations: 2801)
+
+
+Started GET "/users/1" for ::1 at 2020-07-29 18:39:36 -0700
+Processing by UsersController#show as */*
+  Parameters: {"id"=>"1"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:55:in `set_user'
+  [1m[36mConcept Load (0.2ms)[0m  [1m[34mSELECT "concepts".* FROM "concepts" INNER JOIN "comprehensions" ON "concepts"."id" = "comprehensions"."concept_id" WHERE "comprehensions"."user_id" = $1[0m  [["user_id", 1]]
+  ↳ app/controllers/users_controller.rb:13:in `show'
+  [1m[36mInterview Load (24.6ms)[0m  [1m[34mSELECT "interviews".* FROM "interviews" WHERE "interviews"."user_id" = $1[0m  [["user_id", 1]]
+  ↳ app/controllers/users_controller.rb:13:in `show'
+Completed 200 OK in 81ms (Views: 0.1ms | ActiveRecord: 24.9ms | Allocations: 2805)
+
+
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
