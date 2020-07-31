@@ -390,3 +390,83 @@ Completed 200 OK in 81ms (Views: 0.1ms | ActiveRecord: 24.9ms | Allocations: 280
   [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
   [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
   [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists? (8.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "code"], ["LIMIT", 1]]
+  [1m[36mUser Create (33.7ms)[0m  [1m[32mINSERT INTO "users" ("username", "name", "created_at", "updated_at", "password_digest") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["username", "code"], ["name", "code"], ["created_at", "2020-07-30 16:07:57.078357"], ["updated_at", "2020-07-30 16:07:57.078357"], ["password_digest", "$2a$12$sUOBiv2y7iIo6ae0TnjPlufLZQBdDvJk0VMzCHvZzPZZhtofXmwtC"]]
+  [1m[35m (5.9ms)[0m  [1m[35mCOMMIT[0m
+Started POST "/sessions" for ::1 at 2020-07-30 09:30:41 -0700
+  [1m[35m (1.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  
+SyntaxError (/Users/whitneysmith/Documents/Projects/study_buddy/study_buddy_api/study_buddy_api_rails/app/controllers/sessions_controller.rb:19: syntax error, unexpected end, expecting end-of-input):
+  
+app/controllers/sessions_controller.rb:19: syntax error, unexpected end, expecting end-of-input
+app/controllers/sessions_controller.rb:19: syntax error, unexpected end, expecting end-of-input
+Started POST "/sessions" for ::1 at 2020-07-30 09:34:35 -0700
+Started POST "/sessions" for ::1 at 2020-07-30 09:54:31 -0700
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  
+SyntaxError (/Users/whitneysmith/Documents/Projects/study_buddy/study_buddy_api/study_buddy_api_rails/app/controllers/sessions_controller.rb:19: syntax error, unexpected end, expecting end-of-input):
+  
+app/controllers/sessions_controller.rb:19: syntax error, unexpected end, expecting end-of-input
+app/controllers/sessions_controller.rb:19: syntax error, unexpected end, expecting end-of-input
+Started POST "/sessions" for ::1 at 2020-07-30 09:55:04 -0700
+Processing by SessionsController#create as */*
+  Parameters: {"user"=>{"username"=>"code", "password"=>"[FILTERED]"}, "session"=>{"user"=>{"username"=>"code", "password"=>"[FILTERED]"}}}
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "code"], ["LIMIT", 1]]
+  ↳ app/controllers/sessions_controller.rb:4:in `create'
+Completed 200 OK in 242ms (Views: 2.6ms | ActiveRecord: 5.6ms | Allocations: 11573)
+
+
+Started POST "/sessions" for ::1 at 2020-07-30 09:55:50 -0700
+Processing by SessionsController#create as */*
+  Parameters: {"user"=>{"username"=>"code", "password"=>"[FILTERED]"}, "session"=>{"user"=>{"username"=>"code", "password"=>"[FILTERED]"}}}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "code"], ["LIMIT", 1]]
+  ↳ app/controllers/sessions_controller.rb:4:in `create'
+Completed 200 OK in 218ms (Views: 0.3ms | ActiveRecord: 0.4ms | Allocations: 915)
+
+
+Started POST "/registrations" for ::1 at 2020-07-30 20:54:57 -0700
+  [1m[35m (1.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  
+SyntaxError (/Users/whitneysmith/Documents/Projects/study_buddy/study_buddy_api/study_buddy_api_rails/app/controllers/registrations_controller.rb:9: syntax error, unexpected tIDENTIFIER, expecting ')'
+            study_availability: params['user']['study_avail...
+            ^~~~~~~~~~~~~~~~~~
+/Users/whitneysmith/Documents/Projects/study_buddy/study_buddy_api/study_buddy_api_rails/app/controllers/registrations_controller.rb:10: syntax error, unexpected ')', expecting end
+        )
+        ^):
+  
+app/controllers/registrations_controller.rb:9: syntax error, unexpected tIDENTIFIER, expecting ')'
+app/controllers/registrations_controller.rb:10: syntax error, unexpected ')', expecting end
+app/controllers/registrations_controller.rb:9: syntax error, unexpected tIDENTIFIER, expecting ')'
+app/controllers/registrations_controller.rb:10: syntax error, unexpected ')', expecting end
+Started POST "/registrations" for ::1 at 2020-07-30 20:59:19 -0700
+  [1m[35m (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by RegistrationsController#create as HTML
+  Parameters: {"user"=>{"username"=>"abe@mail.com", "name"=>"Abe", "email"=>"abe@mail.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "registration"=>{"user"=>{"username"=>"abe@mail.com", "name"=>"Abe", "email"=>"abe@mail.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}}}
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/registrations_controller.rb:3:in `create'
+  [1m[36mUser Exists? (5.8ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "abe@mail.com"], ["LIMIT", 1]]
+  ↳ app/controllers/registrations_controller.rb:3:in `create'
+  [1m[36mUser Create (7.1ms)[0m  [1m[32mINSERT INTO "users" ("username", "name", "email", "created_at", "updated_at", "password_digest") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["username", "abe@mail.com"], ["name", "Abe"], ["email", "abe@mail.com"], ["created_at", "2020-07-31 03:59:19.365982"], ["updated_at", "2020-07-31 03:59:19.365982"], ["password_digest", "$2a$12$x7bWVY88mK.P.gpU7dJFJ..Hec0FRm7fFH1VQn3/LGtV6rhZSnWcW"]]
+  ↳ app/controllers/registrations_controller.rb:3:in `create'
+  [1m[35m (1.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/registrations_controller.rb:3:in `create'
+Completed 200 OK in 268ms (Views: 1.1ms | ActiveRecord: 27.3ms | Allocations: 14833)
+
+
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" DESC LIMIT $1[0m  [["LIMIT", 1]]
+Started POST "/registrations" for ::1 at 2020-07-31 11:54:17 -0700
+  [1m[35m (1.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by RegistrationsController#create as HTML
+  Parameters: {"user"=>{"username"=>"cathy@mail.com", "name"=>"Cathy", "email"=>"cathy@mail.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "registration"=>{"user"=>{"username"=>"cathy@mail.com", "name"=>"Cathy", "email"=>"cathy@mail.com", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}}}
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/controllers/registrations_controller.rb:3:in `create'
+  [1m[36mUser Exists? (15.4ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."username" = $1 LIMIT $2[0m  [["username", "cathy@mail.com"], ["LIMIT", 1]]
+  ↳ app/controllers/registrations_controller.rb:3:in `create'
+  [1m[36mUser Create (3.2ms)[0m  [1m[32mINSERT INTO "users" ("username", "name", "email", "created_at", "updated_at", "password_digest") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["username", "cathy@mail.com"], ["name", "Cathy"], ["email", "cathy@mail.com"], ["created_at", "2020-07-31 18:54:18.136436"], ["updated_at", "2020-07-31 18:54:18.136436"], ["password_digest", "$2a$12$jPZ3Vpka4wy8kniw9qTiOu3DrAUge7JI6K5Ikrvb1ZodXbS5oI24u"]]
+  ↳ app/controllers/registrations_controller.rb:3:in `create'
+  [1m[35m (4.7ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/controllers/registrations_controller.rb:3:in `create'
+Completed 200 OK in 279ms (Views: 1.2ms | ActiveRecord: 31.9ms | Allocations: 14832)
+
+
