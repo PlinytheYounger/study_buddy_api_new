@@ -8,11 +8,6 @@ class InterviewsController < ApplicationController
     render json: @interviews
   end
 
-  # GET /interviews/1
-  def show
-    render json: @interview
-  end
-
   # POST /interviews
   def create
     @interview = Interview.new(interview_params)

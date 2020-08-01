@@ -7,9 +7,11 @@ class SessionsController < ApplicationController
             .try(:authenticate, params["user"]["password"])
 
         if user
-            session[:user_id] = user.id 
+            # session[:user_id] = user.id 
+            token = create_token(user.id, user.username)
             render json: {
                 status: :created,
+                token: token,
                 logged_in: true,
                 user: user
             }
@@ -37,4 +39,23 @@ class SessionsController < ApplicationController
         reset_session
         render json: { status: 200, logged_out: true}
     end
+
+    private
+        # returns a hash that contains the payload including the user's id and username to be encrypted
+        def payload(id, username)
+            {
+              exp: (Time.now + 30.minutes).to_i,
+              iat: Time.now.to_i,
+              iss: ENV['JWT_ISSUER'],
+              user: {
+                id: id,
+                username: username
+              }
+            }
+          end
+      
+          # method that creates the token with the payload
+          def create_token(id, username)
+            JWT.encode(payload(id, username), ENV['JWT_SECRET'], 'HS256')
+          end
 end
