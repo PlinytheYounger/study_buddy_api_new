@@ -1,8 +1,7 @@
 class User < ApplicationRecord
-    has_many :interviews
-    has_many :relationships
-    has_many :comprehensions
-    has_many :concepts, through: :comprehensions
+    has_many :interviews, dependent: :destroy
+    has_many :relationships, dependent: :destroy
+    has_many :concepts, dependent: :destroy
     has_secure_password
 
     validates_presence_of :username

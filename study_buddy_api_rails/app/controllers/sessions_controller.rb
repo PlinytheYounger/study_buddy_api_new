@@ -7,13 +7,11 @@ class SessionsController < ApplicationController
             .try(:authenticate, params["user"]["password"])
 
         if user
-            # session[:user_id] = user.id 
-            token = create_token(user.id, user.username)
+            session[:user_id] = user.id 
             render json: {
                 status: :created,
-                token: token,
                 logged_in: true,
-                user: user
+                user: user.to_json(include: [:concepts, :interviews])
             }
         else
             render json: { status: 401 }
