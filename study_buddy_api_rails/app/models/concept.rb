@@ -1,4 +1,4 @@
 class Concept < ApplicationRecord
-    has_many :users, through: :comprehensions
+    belongs_to :user
     has_many :practice_problems
 end

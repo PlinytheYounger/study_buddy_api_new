@@ -5,23 +5,7 @@ class ConceptsController < ApplicationController
   def index
     @concepts = Concept.all
 
-    render json: @concepts
-  end
-
-  # GET /concepts/1
-  def show
-    render json: @concept
-  end
-
-  # POST /concepts
-  def create
-    @concept = Concept.new(concept_params)
-
-    if @concept.save
-      render json: @concept, status: :created, location: @concept
-    else
-      render json: @concept.errors, status: :unprocessable_entity
-    end
+    render json: @concepts.to_json(include: [:comprehensions, practice_problems])
   end
 
   # PATCH/PUT /concepts/1

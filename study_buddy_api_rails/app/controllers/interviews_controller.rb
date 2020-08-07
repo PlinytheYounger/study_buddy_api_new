@@ -8,17 +8,12 @@ class InterviewsController < ApplicationController
     render json: @interviews
   end
 
-  # GET /interviews/1
-  def show
-    render json: @interview
-  end
-
   # POST /interviews
   def create
     @interview = Interview.new(interview_params)
 
     if @interview.save
-      render json: @interview, status: :created, location: @interview
+      render json: @interview, status: :created
     else
       render json: @interview.errors, status: :unprocessable_entity
     end
@@ -46,6 +41,7 @@ class InterviewsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def interview_params
-      params.require(:interview).permit(:interview_type, :company_name, :interview_date)
+      params.require(:interview).permit(:interview_type, :company_name, :interview_date, :user_id)
     end
+
 end
