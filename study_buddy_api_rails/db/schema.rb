@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_26_231902) do
+ActiveRecord::Schema.define(version: 2020_08_07_182545) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,6 +30,8 @@ ActiveRecord::Schema.define(version: 2020_07_26_231902) do
     t.string "category"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "user_id"
+    t.integer "comprehension"
   end
 
   create_table "interviews", force: :cascade do |t|
@@ -65,11 +67,12 @@ ActiveRecord::Schema.define(version: 2020_07_26_231902) do
     t.string "username"
     t.string "name"
     t.string "email"
-    t.string "password"
     t.integer "study_availability"
-    t.boolean "isLoggedIn"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "password_digest"
+    t.string "password"
+    t.string "calendar"
   end
 
   add_foreign_key "comprehensions", "concepts"
