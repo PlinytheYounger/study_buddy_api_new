@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  root 'welcome#index'
   
   resources :sessions, only: [:create]
   delete :logout, to: "sessions#logout"
