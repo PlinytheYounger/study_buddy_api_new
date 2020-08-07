@@ -10,11 +10,11 @@ Rails.application.routes.draw do
       post '/login', to: 'sessions#create'
     end
     
-    resources :interviews, except: [:index]
+    resources :interviews, except: [:index, :show]
     resources :comprehensions, except: [:index]
     resources :relationships
     
-    resources :concepts, except: [:index] do
+    resources :concepts, except: [:index, :show] do
       resources :practice_problems
     
     end
